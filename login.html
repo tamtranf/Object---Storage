@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p><b>Tài Khoản</b><input type="text" id="username"></p>
+    <p><b>Mật Khẩu</b><input type="password" id="password"></p>
+    <button value="submit" id="login">Đăng Nhập</button>
+
+
+    <script>
+        /*
+       Thêm tính năng đăng ký user. User là một đối tượng gồm username, password, email, phone. Sau khi đăng ký thành công sẽ lưu danh sách user vào localStorage.
+       Khi đăng nhập sẽ kiểm tra thông tin username, password từ trong danh sách các đối tượng user đã đăng ký (lưu ở localStorage)
+       (Khi đăng ký thì sẽ được đẩy thông tin vào mảng localStorage.
+       Khi đăng nhập thì sẽ kiểm tra xem thông tin nhập vào có đúng với thông tin đã lưu trong localStorage không.
+       Nếu đúng thì chuyển về home. Nếu sai thì chuyển về login.)
+       */
+        let login = document.getElementById("login");
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+
+
+        // var user1 = localStorage.getItem('users')
+        // var pass1 = localStorage.getItem('users');
+
+
+
+        login.onclick = () => {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            if (users.find(_user => _user.username === username.value && _user.password === password.value)) {
+                //Lưu vào session bnếu đăng nhập thành công
+                sessionStorage.setItem('username', username.value);
+                window.location.href = 'home.html';
+            } else {
+                alert("Sai tài khoản mật khẩu");
+                window.location.href = 'http://127.0.0.1:5500/object/login.html';
+
+            }
+
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

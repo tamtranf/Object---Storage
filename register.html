@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p><b>Tài Khoản</b><input type="text" id="username"></p>
+    <p><b>Mật Khẩu</b><input type="pas" id="password"></p>
+    <p><b>Email</b><input type="text" id="email"></p>
+    <p><b>Số điện thoại</b><input type="number" id="phone"></p>
+    <button id="register">Đăng ký</button>
+
+
+    <script>
+        let login = document.getElementById("login");
+        let register = document.getElementById("register");
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        let email = document.getElementById("email");
+        let phone = document.getElementById("phone");
+
+
+        //Khởi tạo mảng để lưu thông tin đăng ký
+
+
+        register.onclick = () => {
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            if (username.value !== "" && password.value !== "") {
+
+                class user {
+                    constructor(username = '', password = '', email = '', phone = '') {
+                        this.username = username;
+                        this.password = password;
+                        this.email = email;
+                        this.phone = phone;
+                    }
+                    inputData() {
+                        this.username = username.value;
+                        this.password = password.value;
+                        this.email = email.value;
+                        this.phone = phone.value;
+                    }
+
+
+
+                }
+                var _user = new user();
+                _user.inputData();
+
+                // Thêm thông tin người dùng vào mảng users
+                users.push(_user);
+
+                // Cập nhật lại danh sách người dùng trong localStorage
+                localStorage.setItem("users", JSON.stringify(users));
+
+                alert("Đăng ký thành công");
+
+                window.location.href = 'login.html';
+
+            } else {
+                alert("Đăng ký không thành công");
+            }
+
+
+        }
+    </script>
+
+
+</body>
+
+</html>
